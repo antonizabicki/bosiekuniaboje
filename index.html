@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>bosiekuniaboje</title>
+  <link rel="icon" type="image/x-icon" href="favicon.png">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
+
+
+
+    body {
+      background-color: #000;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .main-container {
+      width: 100%;
+      max-width: 800px;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    
+    .countdown-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    
+    .countdown {
+      display: flex;
+      justify-content: center;
+      color: #fff;
+      font-size: 32px;
+      font-weight: 500;
+    }
+    
+    .time-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 15px;
+      position: relative;
+    }
+    
+    .time-value {
+      font-size: 48px;
+      font-weight: 600;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      transition: all 0.3s ease;
+    }
+    
+    .time-label {
+      font-size: 16px;
+      font-weight: 400;
+      opacity: 0.8;
+      margin-top: 5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+      transition: all 0.3s ease;
+    }
+    
+    /* Hover effect for time values */
+    .time-value:hover {
+      color: transparent;
+      text-shadow: none;
+      -webkit-text-stroke: 1px #fff;
+    }
+    
+    /* Hover effect for time labels */
+
+  </style>
+</head>
+<body>
+  <div class="main-container">
+    <div class="countdown-container">
+      <div class="countdown">
+        <div class="time-block">
+          <div class="time-value" id="days">00</div>
+          <div class="time-label">Days</div>
+        </div>
+        <div class="time-block">
+          <div class="time-value" id="hours">00</div>
+          <div class="time-label">Hours</div>
+        </div>
+        <div class="time-block">
+          <div class="time-value" id="minutes">00</div>
+          <div class="time-label">Min</div>
+        </div>
+        <div class="time-block">
+          <div class="time-value" id="seconds">00</div>
+          <div class="time-label">Sec</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function updateCountdown() {
+      const targetDate = new Date("2025-04-24T00:00:00+02:00");
+      const currentDate = new Date();
+      
+      let timeDifference = targetDate - currentDate;
+      
+      if (timeDifference <= 0) {
+        document.getElementById("days").textContent = "00";
+        document.getElementById("hours").textContent = "00";
+        document.getElementById("minutes").textContent = "00";
+        document.getElementById("seconds").textContent = "00";
+        return;
+      }
+      
+      const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+      timeDifference -= days * (1000 * 60 * 60 * 24);
+      
+      const hours = Math.floor(timeDifference / (1000 * 60 * 60));
+      timeDifference -= hours * (1000 * 60 * 60);
+      
+      const minutes = Math.floor(timeDifference / (1000 * 60));
+      timeDifference -= minutes * (1000 * 60);
+      
+      const seconds = Math.floor(timeDifference / 1000);
+      
+      document.getElementById("days").textContent = days.toString().padStart(2, "0");
+      document.getElementById("hours").textContent = hours.toString().padStart(2, "0");
+      document.getElementById("minutes").textContent = minutes.toString().padStart(2, "0");
+      document.getElementById("seconds").textContent = seconds.toString().padStart(2, "0");
+    }
+    
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
